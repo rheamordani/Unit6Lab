@@ -31,6 +31,7 @@ public class DrawingGeometricFigures {
                 System.out.println("What is the length of the rectangle: ");
                 int sideLength = input.nextInt();
                 System.out.println("Border-only or solid (enter border/solid): ");
+                input.nextLine();
                 String borderOrSolid = input.nextLine();
                 System.out.println("Character to use for drawing?");
                 char charForDrawing = input.next().charAt(0);
@@ -38,13 +39,15 @@ public class DrawingGeometricFigures {
             }
             if (choice1 == 3) {
                 System.out.println("Enter the height: ");
-                double height = input.nextDouble();
+                int height = input.nextInt();
                 System.out.println("Triangle points up or down (up/down): ");
                 String upOrDown = input.nextLine();
+                input.nextLine();
                 System.out.println("Border-only or solid (enter border/solid): ");
                 String borderOrSolid = input.nextLine();
                 System.out.println("Character to use for drawing?");
                 char charForDrawing = input.next().charAt(0);
+                drawingTriangle(height,upOrDown, charForDrawing, borderOrSolid);
             }
         }
     }
@@ -89,23 +92,65 @@ public class DrawingGeometricFigures {
             for (i = 1; i <= width; i++) {
                 System.out.println();
                 for (j = 1; j <= length; j++) {
-                    System.out.print(charForDrawing);
+                    System.out.print(charForDrawing + " ");
                 }
             }
             System.out.println();
         }
+        if (borderOrSolid.equalsIgnoreCase("border")) {
+            for (i = 1; i <= length; i++) {
+                System.out.print(charForDrawing + " ");
+            }
+            System.out.println();
+            for (i = 1; i <= width - 2; i++) {
+                System.out.print(charForDrawing);
+                for (j = 1; j <= 2 * length - 3; j++) {
+                    System.out.print(" ");
+                }
+                System.out.print(charForDrawing);
+                System.out.println();
+            }
+            for (i = 1; i <= length; i++) {
+                System.out.print(charForDrawing + " ");
+            }
+        }
+        System.out.println();
     }
-    /*
-    public static void drawingTriangle(int height, String upOrDown, char charForDrawing, String borderOrSolid) {
-        int sideLength = (int)((2*Math.sqrt(3)/3));
-        for (int i=0; i<sideLength; i++){
-            for(int j=0; j<sideLength){
 
+    public static void drawingTriangle(int height, String upOrDown, char charForDrawing, String borderOrSolid) {
+        if (upOrDown.equalsIgnoreCase("up")) {
+            if (borderOrSolid.equalsIgnoreCase("solid")) {
+                for (int i = height + 1, k = 0; i > 0 && k < height + 1; i--, k++) {
+                    for (int j = 0; j < i; j++) {
+                        System.out.print(" ");
+                    }
+                    for (int j = 0; j < k; j++) {
+                        System.out.print(charForDrawing);
+                    }
+                    for (int j = 1; j < k; j++) {
+                        System.out.print(charForDrawing);
+                    }
+                    System.out.println();
+                }
+            }
+        }
+        if (upOrDown.equalsIgnoreCase("down")){
+            if (borderOrSolid.equalsIgnoreCase("solid")) {
+                for (int i = height + 1, k = 0; i > 0 && k < height + 1; i--, k++) {
+                    for (int j = 0; j > i; j++) {
+                        System.out.print(" ");
+                    }
+                    for (int j = 0; j < k; j++) {
+                        System.out.print(charForDrawing);
+                    }
+                    for (int j = 1; j > k; j++) {
+                        System.out.print(charForDrawing);
+                    }
+                    System.out.println();
+                }
             }
         }
     }
-
-     */
 }
 
 
